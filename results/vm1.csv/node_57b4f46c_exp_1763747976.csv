@@ -1,0 +1,4 @@
+timestamp,nodes,messages,lookups,avg_lookup_ms
+1763748006,1,2,1,50.00
+1763748031,1,5,4,50.00
+1763748031,1,5,4,0.00

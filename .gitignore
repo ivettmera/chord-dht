@@ -39,10 +39,6 @@ Thumbs.db
 *.log
 logs/
 
-# Results and metrics
-results/
-metrics/
-experiments/
 
 # Temporary files
 tmp/
