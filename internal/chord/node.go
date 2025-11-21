@@ -218,9 +218,14 @@ func (n *Node) Join(bootstrapAddr string) error {
 	
 	// Initialize predecessor as nil (will be set by stabilization)
 	n.predecessor = nil
-	
+
 	log.Printf("Node %s joined ring, successor: %s", 
 		n.id.String()[:8], n.successor.ID.String()[:8])
+	
+	// Notify successor about us immediately after join
+	if err := n.remoteNotify(n.successor.Address); err != nil {
+		log.Printf("Node %s: failed to notify successor after join: %v", n.id.String()[:8], err)
+	}
 	
 	return nil
 }
