@@ -10,12 +10,12 @@ cd /home/i298832/chord-dht && ./bin/chord-node --addr 0.0.0.0:8000 --public 34.3
 grpcurl -plaintext localhost:8000 proto.ChordService/GetInfo | head -10
 
 # Iniciar el nodo 2
-cd /home/i298832/CHORD-DHT
+cd /home/i298832/chord-dht
 ./bin/chord-node --addr 0.0.0.0:8001 --public 35.199.69.216:8001 --bootstrap 34.38.96.126:8000 --metrics results/vm2.csv --id join-vm2
-grpcurl -plaintext localhost:8001 proto.grpcurl -plaintext localhost:8001 proto.ChordService/GetInfo | grep -E "node|predecessor|successor" -A2grpcurl -plaintext localhost:8001 proto.ChordService/GetInfo | grep -E "node|predecessor|successor" -A2grpcurl -plaintext localhost:8001 proto.ChordService/GetInfo | grep -E "node|predecessor|successor" -A2grpcurl -plaintext localhost:8001 proto.ChordService/GetInfo | grep -E "node|predecessor|successor" -A2ChordService/GetInfo | grep -E "node|predecessor|successor" -A2
+grpcurl -plaintext localhost:8001 proto.ChordService/GetInfo | grep -E "node|predecessor|successor" -A2
 
 #Iniciar el nodo 3
-cd /home/i298832/CHORD-DHT
+cd /home/i298832/chord-dht
 ./bin/chord-node --addr 0.0.0.0:8002 --public 34.58.253.117:8002 --bootstrap 34.38.96.126:8000 --metrics results/vm3.csv --id join-vm31
 grpcurl -plaintext localhost:8002 proto.ChordService/GetInfo | grep -E "node|predecessor|successor" -A2
 
@@ -29,3 +29,16 @@ cd /home/i298832/chord-dht && make build
 git add . && git commit -m "Update" && git push origin master
 git pull origin master
 git reset --hard origin/master
+
+
+#limpiar
+cd ~
+rm -rf chord-dht
+go clean -modcache
+git clone https://github.com/ivettmera/chord-dht.git
+cd chord-dht
+
+# Verifica que el proceso esté corriendo
+ps aux | grep chord-node
+# Verifica que el puerto esté escuchando
+ss -tlnp | grep :8000
